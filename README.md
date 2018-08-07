@@ -27,6 +27,7 @@ dependencies {
         app:tabTextSize="..."  //字体大小
         app:tabIconSize="..."  //图标大小
         app:tabTextColor="..." //字体颜色
+        app:tabSelectedTextColor="..."//选中字体颜色
         app:msgTextSize="..."/>//消息数字大小
 ```
 
