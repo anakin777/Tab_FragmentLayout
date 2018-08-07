@@ -6,6 +6,7 @@
         <attr name="tabBarHeight" format="dimension"/>
         <attr name="tabTextSize" format="dimension"/>
         <attr name="tabTextColor" format="color"/>
+        <attr name="tabSelectedTextColor" format="color"/>
         <attr name="tabIconSize" format="dimension"/>
         <attr name="msgTextSize" format="dimension"/>
     </declare-styleable>

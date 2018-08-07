@@ -25,6 +25,8 @@ public class TabFragmentLayout extends ConstraintLayout {
     private int tabTextSize;
     //标签字体颜色
     private int tabTextColor;
+    //标签选中字体颜色
+    private int tabSelectedTextColor;
     //标签图标大小
     private int tabIconSize;
     //标签消息字体大小
@@ -65,6 +67,7 @@ public class TabFragmentLayout extends ConstraintLayout {
         tabBarHeight = array.getDimensionPixelSize(R.styleable.TabFragmentLayout_tabBarHeight, context.getResources().getDimensionPixelSize(R.dimen.dp_65));
         tabTextSize  = array.getDimensionPixelSize(R.styleable.TabFragmentLayout_tabTextSize,  context.getResources().getDimensionPixelSize(R.dimen.dp_11));
         tabTextColor = array.getColor(R.styleable.TabFragmentLayout_tabTextColor, Color.BLACK);
+        tabSelectedTextColor = array.getColor(R.styleable.TabFragmentLayout_tabSelectedTextColor, Color.BLACK);
         tabIconSize = array.getDimensionPixelSize(R.styleable.TabFragmentLayout_tabIconSize, context.getResources().getDimensionPixelSize(R.dimen.dp_35));
         leftMargin = (int) (tabIconSize*0.667);
         msgTextSize  = array.getDimensionPixelSize(R.styleable.TabFragmentLayout_msgTextSize,  context.getResources().getDimensionPixelSize(R.dimen.dp_12));
@@ -90,7 +93,6 @@ public class TabFragmentLayout extends ConstraintLayout {
             tab.setLayoutParams(tabsLp);
             TextView title_tab = this.findViewById(tvIds[i]);
             title_tab.setText(tabs.get(i).getTitle());
-            title_tab.setTextColor(tabTextColor);
             title_tab.setTextSize(TypedValue.COMPLEX_UNIT_PX,tabTextSize);
             ImageView icon_tab = this.findViewById(ivIds[i]);
             LayoutParams iconLp = (LayoutParams) icon_tab.getLayoutParams();
@@ -98,11 +100,13 @@ public class TabFragmentLayout extends ConstraintLayout {
             iconLp.height = tabIconSize;
             icon_tab.setLayoutParams(iconLp);
             if (i==0){
+                title_tab.setTextColor(tabTextColor);
                 icon_tab.setImageResource(tabs.get(i).getSelectedIcon());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .add(R.id.fl_content,tabs.get(i).getFragment(),tabs.get(i).getTitle())
                         .commit();
             }else {
+                title_tab.setTextColor(tabSelectedTextColor);
                 icon_tab.setImageResource(tabs.get(i).getGeneralIcon());
             }
 
@@ -123,12 +127,15 @@ public class TabFragmentLayout extends ConstraintLayout {
     public void updateMenu(ArrayList<Tab_Bean> tabs,int position){
         for (int i=0;i<tabs.size();i++){
             ImageView icon_tab = this.findViewById(ivIds[i]);
+            TextView title_tab = this.findViewById(tvIds[i]);
             if (i==position){
+                title_tab.setTextColor(tabTextColor);
                 icon_tab.setImageResource(tabs.get(i).getSelectedIcon());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fl_content,tabs.get(i).getFragment(),tabs.get(i).getTitle())
                         .commit();
             }else {
+                title_tab.setTextColor(tabSelectedTextColor);
                 icon_tab.setImageResource(tabs.get(i).getGeneralIcon());
             }
             TextView msgCount = this.findViewById(msgIds[i]);
