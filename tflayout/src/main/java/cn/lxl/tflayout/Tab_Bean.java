@@ -14,6 +14,7 @@ public class Tab_Bean {
     private int generalIcon;
     private int selectedIcon;
     private int msgcount;
+    private boolean isFragmentAdded = false;
     private Fragment fragment;
 
     public Fragment getFragment() {
@@ -30,6 +31,14 @@ public class Tab_Bean {
         this.selectedIcon = selectedIcon;
         this.msgcount = msgcount;
         this.fragment = fragment;
+    }
+
+    public boolean isFragmentAdded() {
+        return isFragmentAdded;
+    }
+
+    public void setFragmentAdded(boolean fragmentAdded) {
+        isFragmentAdded = fragmentAdded;
     }
 
     public int getGeneralIcon() {

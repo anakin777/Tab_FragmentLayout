@@ -105,6 +105,7 @@ public class TabFragmentLayout extends ConstraintLayout {
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .add(R.id.fl_content,tabs.get(i).getFragment(),tabs.get(i).getTitle())
                         .commit();
+                tabs.get(i).setFragmentAdded(true);
             }else {
                 title_tab.setTextColor(tabTextColor);
                 icon_tab.setImageResource(tabs.get(i).getGeneralIcon());
@@ -131,12 +132,23 @@ public class TabFragmentLayout extends ConstraintLayout {
             if (i==position){
                 title_tab.setTextColor(tabSelectedTextColor);
                 icon_tab.setImageResource(tabs.get(i).getSelectedIcon());
-                mActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fl_content,tabs.get(i).getFragment(),tabs.get(i).getTitle())
-                        .commit();
+                if (tabs.get(i).isFragmentAdded()){
+                    mActivity.getSupportFragmentManager().beginTransaction()
+                            .show(tabs.get(i).getFragment())
+                            .commit();
+                }else {
+                    tabs.get(i).setFragmentAdded(true);
+                    mActivity.getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fl_content,tabs.get(i).getFragment(),tabs.get(i).getTitle())
+                            .commit();
+                }
+
             }else {
                 title_tab.setTextColor(tabTextColor);
                 icon_tab.setImageResource(tabs.get(i).getGeneralIcon());
+                mActivity.getSupportFragmentManager().beginTransaction()
+                        .hide(tabs.get(i).getFragment())
+                        .commit();
             }
             TextView msgCount = this.findViewById(msgIds[i]);
             if (tabs.get(i).getMsgcount()!=0){
