@@ -11,7 +11,7 @@ repositories {
 ### Module build.gradle
 ```
 dependencies {
-        implementation 'com.github.anakin777:Tab_FragmentLayout:v1.0.1'
+        implementation 'com.github.anakin777:Tab_FragmentLayout:v1.0.8'
     }
 
 ```
