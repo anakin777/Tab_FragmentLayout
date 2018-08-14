@@ -146,9 +146,11 @@ public class TabFragmentLayout extends ConstraintLayout {
             }else {
                 title_tab.setTextColor(tabTextColor);
                 icon_tab.setImageResource(tabs.get(i).getGeneralIcon());
-                mActivity.getSupportFragmentManager().beginTransaction()
-                        .hide(tabs.get(i).getFragment())
-                        .commit();
+                if (tabs.get(i).isFragmentAdded()) {
+                    mActivity.getSupportFragmentManager().beginTransaction()
+                            .hide(tabs.get(i).getFragment())
+                            .commit();
+                }
             }
             TextView msgCount = this.findViewById(msgIds[i]);
             if (tabs.get(i).getMsgcount()!=0){
